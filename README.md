@@ -28,7 +28,7 @@ jobs:
       uses: ba-st-actions/email-release-notification@v2.0.0
       env:
         SENDGRID_API_TOKEN: ${{ secrets.SENDGRID_API_TOKEN }}
-        RECIPIENTS: ${{ secrets.RECIPIENTS }}
+        RECIPIENTS_URL: ${{ secrets.RECIPIENTS_URL }}
 ```
 
 ### 2. Set the SendGrid secret
