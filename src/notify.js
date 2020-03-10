@@ -48,7 +48,7 @@ async function run(recipientsUrl) {
  * Run
  */
 setCredentials();
-run(process.env.RECIPIENTS)
+run(process.env.RECIPIENTS_URL)
   .catch((error) => {
     console.error(error);
     process.exit(1);
