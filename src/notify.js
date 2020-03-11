@@ -25,12 +25,14 @@ async function prepareMessage(recipients) {
 
   const releaseBody = converter.makeHtml(`${header}\n\n${release.body}${footer}`);
 
+  const sender = process.env.SENDER_EMAIL;
+
   return {
-    to: 'noreply@github.com',
     from: {
       name: ownerName,
-      email: 'notifications@github.com',
+      email: sender,
     },
+    to: sender,
     bcc: recipients,
     subject,
     html: releaseBody,

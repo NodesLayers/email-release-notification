@@ -25,10 +25,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Notify about a new release
-      uses: ba-st-actions/email-release-notification@v2.0.0
+      uses: ba-st-actions/email-release-notification@v3.0.0
       env:
         SENDGRID_API_TOKEN: ${{ secrets.SENDGRID_API_TOKEN }}
         RECIPIENTS_URL: ${{ secrets.RECIPIENTS_URL }}
+        SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
 ```
 
 ### 2. Set the SendGrid secret
@@ -46,6 +47,10 @@ list@example.com
 ```
 
 If you don't know where to host this file, just go to [GitHub Gists](https://gist.github.com) and create a new textfile with the e-mails you want to target. After you save the file just click `raw` and get the URI of the file you've just created.
+
+### 3. Set the SENDER_EMAIL secret
+
+Do the same for a secret named `SENDER_EMAIL` including the e-mail to be used in the `from:` field on the mail message.
 
 ### 4. Test the workflow!
 

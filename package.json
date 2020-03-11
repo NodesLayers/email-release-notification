@@ -1,6 +1,6 @@
 {
   "name": "email-release-notification",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "SendGrid GitHub Notify Action",
   "author": {
     "name": "Buenos Aires Smalltalk",
