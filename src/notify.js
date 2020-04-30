@@ -5,7 +5,7 @@ const sendgridMail = require('@sendgrid/mail');
 
 const setCredentials = () => sendgridMail.setApiKey(process.env.SENDGRID_API_TOKEN);
 
-async function prepareMessage(recipients) {
+async function prepareMessage(recipients, lists) {
   const { repository, release } = JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8'));
 
   const converter = new showdown.Converter();
@@ -33,15 +33,17 @@ async function prepareMessage(recipients) {
       email: sender,
     },
     to: sender,
+    cc: lists,
     bcc: recipients,
     subject,
     html: releaseBody,
   };
 }
-async function run(recipientsUrl) {
+async function run(recipientsUrl, distributionLists) {
   const { data } = await axios.get(recipientsUrl);
   const recipients = data.split(/\r\n|\n|\r/);
-  const message = await prepareMessage(recipients);
+  const lists = distributionLists ? distributionLists.split(',') : [];
+  const message = await prepareMessage(recipients, lists);
   await sendgridMail.send(message);
   console.log('Mail sent!');
 }
@@ -50,7 +52,7 @@ async function run(recipientsUrl) {
  * Run
  */
 setCredentials();
-run(process.env.RECIPIENTS_URL)
+run(process.env.RECIPIENTS_URL, process.env.DISTRIBUTION_LISTS)
   .catch((error) => {
     console.error(error);
     process.exit(1);

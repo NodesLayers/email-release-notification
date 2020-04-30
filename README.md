@@ -30,6 +30,7 @@ jobs:
         SENDGRID_API_TOKEN: ${{ secrets.SENDGRID_API_TOKEN }}
         RECIPIENTS_URL: ${{ secrets.RECIPIENTS_URL }}
         SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
+        DISTRIBUTION_LISTS: ${{ secrets.DISTRIBUTION_LISTS }}
 ```
 
 ### 2. Set the SendGrid secret
@@ -48,10 +49,14 @@ list@example.com
 
 If you don't know where to host this file, just go to [GitHub Gists](https://gist.github.com) and create a new textfile with the e-mails you want to target. After you save the file just click `raw` and get the URI of the file you've just created.
 
-### 3. Set the SENDER_EMAIL secret
+### 4. Set the DISTRIBUTION_LISTS secret (Optional)
+
+Do the same for a secret named `DISTRIBUTION_LISTS`. The secret contents is a comma separated list of e-mails for other lists (This e-mails will be put in CC in the outgoing mail).
+
+### 5. Set the SENDER_EMAIL secret
 
 Do the same for a secret named `SENDER_EMAIL` including the e-mail to be used in the `from:` field on the mail message.
 
-### 4. Test the workflow!
+### 6. Test the workflow!
 
 Create a new release for your repository and verify that the action triggers and that the e-mails were sent. Sometimes it's worth checking the spam inbox.
