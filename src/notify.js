@@ -11,7 +11,7 @@ async function prepareMessage(recipients, lists) {
   const converter = new showdown.Converter();
   const repoName = repository.name;
   const repoURL = repository.html_url;
-  const repoDescription = repository.description ? `, ${repository.description.toLowerCase()}` : '';
+  const repoDescription = repository.description ? `, ${repository.description.charAt(0).toLowerCase()+repository.description.slice(1)}` : '';
   const releaseVersion = release.tag_name;
   const releaseName = release.name;
   const releaseURL = release.html_url;
