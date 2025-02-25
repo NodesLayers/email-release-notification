@@ -23,7 +23,7 @@ async function prepareMessage(recipients, lists) {
   const footer = `\n\nRegards,\n\nThe Nodes&Layers team`;
   const header = `[${repoName}](${repoURL}) [${releaseVersion}](${releaseURL}) has just been released.\n`;
 
-  const releaseBody = converter.makeHtml(`${header}\n\n${release.body}\n\n${footer}`);
+  const releaseBody = converter.makeHtml(`${header}\n\n<hr>${release.body}<hr>\n\n${footer}`);
 
   const sender = process.env.SENDER_EMAIL;
 
