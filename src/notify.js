@@ -19,11 +19,11 @@ async function prepareMessage(recipients, lists) {
   const ownerName = ownerResponse.data.name;
 
   // Templates
-  const subject = `[ANN] ${repoName} ${releaseVersion} [${releaseName}] released!`;
-  const footer = `\n\nRegards,\n\nThe ${ownerName} team`;
-  const header = `[${repoName}](${repoURL})${repoDescription} reached it's [${releaseVersion}](${releaseURL}) version.`;
+  const subject = `[${repoName}] ${releaseVersion} released!`;
+  const footer = `\n\nRegards,\n\nThe Nodes&Layers team`;
+  const header = `[${repoName}](${repoURL}) [${releaseVersion}](${releaseURL}) has just been released.\n`;
 
-  const releaseBody = converter.makeHtml(`${header}\n\n${release.body}${footer}`);
+  const releaseBody = converter.makeHtml(`${header}\n\n${release.body}\n\n${footer}`);
 
   const sender = process.env.SENDER_EMAIL;
 
@@ -32,7 +32,7 @@ async function prepareMessage(recipients, lists) {
       name: ownerName,
       email: sender,
     },
-    to: sender,
+    to: `info@nodeslayers.com`,
     cc: lists,
     bcc: recipients,
     subject,
