@@ -29,7 +29,7 @@ async function prepareMessage(recipients, lists) {
 
   return {
     from: {
-      name: ownerName,
+      name: `Nodes&Layers`,
       email: sender,
     },
     to: `info@nodeslayers.com`,
