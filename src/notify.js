@@ -69,10 +69,12 @@ if (process.env.RECIPIENTS_LIST) {
 }
 
 if (process.env.RECIPIENTS_URL) {
-  const list = process.env.RECIPIENTS_URL.split(',');
-  const { data } = await axios.get(list);
-  const recipients_list = data.split(/\r\n|\n|\r/);
-  console.log('Recipients list:', recipients_list);
+  (async () => {
+    const list = process.env.RECIPIENTS_URL.split(',');
+    const { data } = await axios.get(list);
+    const recipients_list = data.split(/\r\n|\n|\r/);
+    console.log('Recipients list:', recipients_list);
+  })();
 }
 
 
