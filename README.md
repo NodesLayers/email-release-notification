@@ -28,9 +28,11 @@ jobs:
       uses: ba-st-actions/email-release-notification@v3.0.0
       env:
         SENDGRID_API_TOKEN: ${{ secrets.SENDGRID_API_TOKEN }}
-        RECIPIENTS_URL: ${{ secrets.RECIPIENTS_URL }}
         SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
         DISTRIBUTION_LISTS: ${{ secrets.DISTRIBUTION_LISTS }}
+        # One of these two is mandatory
+        RECIPIENTS_URL: ${{ secrets.RECIPIENTS_URL }} 
+        RECIPIENTS_LIST: "spam@spam.com,spam@gov.uk" # comma separated list of e-mails
 ```
 
 ### 2. Set the SendGrid secret
@@ -38,7 +40,7 @@ jobs:
 Create a new secret on your project named `SENDGRID_API_TOKEN`. Set the value to your [SendGrid API Key](https://sendgrid.com/docs/ui/account-and-settings/api-keys/).
 
 
-### 3. Set the RECIPIENTS_URL secret
+### 3. Set the RECIPIENTS_URL secret or RECIPIENTS_LIST value
 
 Do the same for a secret named `RECIPIENTS_URL` that you need to set to the URI of the text file with the target recipients. The contents of the file should be a list of e-mails separated by newlines, for example:
 
