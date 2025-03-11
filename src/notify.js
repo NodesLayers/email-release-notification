@@ -55,31 +55,31 @@ async function run(recipientsUrl, distributionLists) {
  */
 setCredentials();
 
+let recipients_list = [];
+
 if (!process.env.RECIPIENTS_URL) {
-  console.warn('RECIPIENTS_URL is missing, using RECIPENTS_LIST instead');
+  console.warn('RECIPIENTS_URL is missing, using RECIPIENTS_LIST instead');
   if (!process.env.RECIPIENTS_LIST) {
     console.error('RECIPIENTS_LIST is missing, please specify either RECIPIENTS_URL or RECIPIENTS_LIST');
     process.exit(1);
-  }
-}
-
-if (process.env.RECIPIENTS_LIST) {
-  const recipients_list = process.env.RECIPIENTS_LIST.split(',');
+  } else {
+    recipients_list = process.env.RECIPIENTS_LIST.split(',');
     console.log('Recipients list:', recipients_list);
+  }
 }
 
 if (process.env.RECIPIENTS_URL) {
   (async () => {
     const list = process.env.RECIPIENTS_URL.split(',');
     const { data } = await axios.get(list);
-    const recipients_list = data.split(/\r\n|\n|\r/);
+    recipients_list = data.split(/\r\n|\n|\r/);
     console.log('Recipients list:', recipients_list);
+    await run(recipients_list, process.env.DISTRIBUTION_LISTS);
   })();
+} else {
+  run(recipients_list, process.env.DISTRIBUTION_LISTS)
+    .catch((error) => {
+      console.error(error);
+      process.exit(1);
+    });
 }
-
-
-run(recipients_list, process.env.DISTRIBUTION_LISTS)
-  .catch((error) => {
-    console.error(error);
-    process.exit(1);
-  });
